@@ -47,7 +47,8 @@ spec:
         hostPath:
           path: /etc/ssl/certs
       - name: grafana-storage
-        emptyDir: {}
+        hostPath:
+          path: /data/shared/heapster/grafana/data
 ---
 apiVersion: v1
 kind: Service
@@ -64,9 +65,10 @@ spec:
   # or through a public IP.
   # type: LoadBalancer
   # You could also use NodePort to expose the service at a randomly-generated port
-  # type: NodePort
+  type: NodePort
   ports:
   - port: 80
     targetPort: 3000
+    nodePort: 30081
   selector:
     k8s-app: grafana
