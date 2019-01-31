@@ -63,12 +63,13 @@ metadata:
 spec:
   # In a production setup, we recommend accessing Grafana through an external Loadbalancer
   # or through a public IP.
-  # type: LoadBalancer
+  type: LoadBalancer
   # You could also use NodePort to expose the service at a randomly-generated port
-  type: NodePort
+  # type: nodePort
   ports:
-  - port: 80
+  - nodePort: 30625
+    port: 3000
+    protocol: TCP
     targetPort: 3000
-    nodePort: 30081
   selector:
     k8s-app: grafana
